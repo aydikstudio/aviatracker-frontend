@@ -1,67 +1,71 @@
-import { useSearchParams } from "react-router";
-import { QUERY_PARAM_FLIGHT } from "./flights.constants";
-import { cn } from "../../utils/cn";
-import type { IFlight } from "../../types/flight.types";
+import { useSearchParams } from 'react-router'
+
+import type { IFlight } from '../../types/flight.types'
+import { cn } from '../../utils/cn'
+
+import { FlightCardActions } from './actions/FlightCardActions'
+import { QUERY_PARAM_FLIGHT } from './flights.constants'
 
 interface Props {
-  flight: IFlight;
+	flight: IFlight
 }
 
 export function FlightCard({ flight }: Props) {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const selectedFlight = searchParams.get(QUERY_PARAM_FLIGHT);
+	const [searchParams, setSearchParams] = useSearchParams()
+	const selectedFlight = searchParams.get(QUERY_PARAM_FLIGHT)
 
-  const isActive = selectedFlight == flight.id;
+	const isActive = selectedFlight == flight.id
 
-  return (
-    <div
-      className={cn(
-        "rounded-lg p-0.5 w-full transition-colors ease-in",
-        isActive
-          ? "bg-gradient-to-r from-rose-500 to-orange-400"
-          : "bg-transparent"
-      )}
-    >
-      <button
-        onClick={() => {
-          setSearchParams({
-            [QUERY_PARAM_FLIGHT]: flight.id,
-          });
-        }}
-        className={cn("bg-neutral-900 p-5 block w-full h-full")}
-      >
-        <div>
-          <div className="flex justify-between items-center mb-7">
-            <div className="flex items-center gap-3">
-              <img
-                src={flight.logo}
-                alt={flight.id}
-                width={40}
-                height={40}
-                className="rounded-full bg-white"
-              />
-              <span>{flight.id}</span>
-            </div>
-            <div>
-              <span className="bg-neutral-800 rounded-xl py-0.5 px-1.5">
-                {flight.aircraftReg}
-              </span>
-            </div>
-          </div>
+	return (
+		<div
+			className={cn(
+				'w-full rounded-lg p-0.5 transition-colors ease-in',
+				isActive
+					? 'bg-gradient-to-r from-rose-500 to-orange-400'
+					: 'bg-transparent'
+			)}
+		>
+			<FlightCardActions />
+			<button
+				onClick={() => {
+					setSearchParams({
+						[QUERY_PARAM_FLIGHT]: flight.id
+					})
+				}}
+				className={cn('block h-full w-full bg-neutral-900 p-5')}
+			>
+				<div>
+					<div className='mb-7 flex items-center justify-between'>
+						<div className='flex items-center gap-3'>
+							<img
+								src={flight.logo}
+								alt={flight.id}
+								width={40}
+								height={40}
+								className='rounded-full bg-white'
+							/>
+							<span>{flight.id}</span>
+						</div>
+						<div>
+							<span className='rounded-xl bg-neutral-800 px-2 py-1'>
+								{flight.aircraftReg}
+							</span>
+						</div>
+					</div>
 
-          <div className="flex justify-between items-center">
-            <div className="space-y-0.5">
-              <div>{flight.from.city}</div>
-              <div className="font-semibold text-3xl">{flight.from.code}</div>
-            </div>
-            <div></div>
-            <div>
-              <div>{flight.to.city}</div>
-              <div>{flight.to.code}</div>
-            </div>
-          </div>
-        </div>
-      </button>
-    </div>
-  );
+					<div className='flex items-center justify-between'>
+						<div className='space-y-0.5 text-left'>
+							<div>{flight.from.city}</div>
+							<div className='text-3xl font-semibold'>{flight.from.code}</div>
+						</div>
+						<div></div>
+						<div>
+							<div>{flight.to.city}</div>
+							<div>{flight.to.code}</div>
+						</div>
+					</div>
+				</div>
+			</button>
+		</div>
+	)
 }
