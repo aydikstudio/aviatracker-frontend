@@ -25,18 +25,21 @@ export function FlightDetails() {
 
 	return (
 		<aside
-			className='absolute top-7 right-7 w-sm overflow-hidden rounded-xl bg-[#101010]'
+			className='xs:rounded-lg xs:top-35 xs:inset-2.5 xs:w-[95%] absolute top-7 right-7 w-sm overflow-hidden rounded-xl bg-[#101010] sm:inset-3 sm:top-21 sm:w-[95.5%] md:top-28'
 			// style={{
-			//   height: "calc(100% - 56px)",
+			// 	height: 'calc(100% - 56px)'
 			// }}
 		>
 			<FlightHeader flight={flight} />
 			<FlightImage flight={flight} />
+
 			<div className='p-3.5'>
 				<FlightRoute flight={flight} />
-				<FlightStatus />
+				<FlightStatus progress={flight.progress} />
 				<FlightSchedule />
+
 				<FlightInformation flight={flight} />
+
 				<FlightActions
 					onRoute={() => {}}
 					onFollow={() => {}}
