@@ -36,7 +36,7 @@ export function FlightList() {
 	}, [currentAirline, fromCountry])
 
 	return (
-		<div className='xs:w-full w-sm'>
+		<div className='xs:w-full z-100 w-sm'>
 			<Filters
 				fromCountry={fromCountry}
 				setFromCountry={setFromCountry}
