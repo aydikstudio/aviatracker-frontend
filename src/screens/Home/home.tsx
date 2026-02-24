@@ -6,11 +6,11 @@ import { FlightList } from '../../components/flight-list/FlightList'
 export function Home() {
 	return (
 		<div>
-			<FlightList />
-			<FlightDetails />
-			<div className='absolute inset-0 -z-50'>
+			<div className='absolute inset-0'>
 				<SkyTrackMap />
 			</div>
+			<FlightList />
+			<FlightDetails />
 		</div>
 	)
 }
